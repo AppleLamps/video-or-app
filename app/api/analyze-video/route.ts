@@ -4,6 +4,7 @@ const MODEL = "google/gemini-2.5-flash-lite";
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 async function fileToDataUrl(file: File): Promise<string> {
     const buffer = Buffer.from(await file.arrayBuffer());
