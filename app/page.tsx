@@ -309,25 +309,15 @@ export default function Page() {
                                             </span>
                                         )}
                                     </h3>
-                                    <CopyButton text={`${analysis.summary}\n\n${analysis.details}`} label="all" />
+                                    <CopyButton text={`${analysis.summary}\n\n${analysis.details}`} />
                                 </div>
                                 <div className="rounded-lg border border-gray-300 bg-white px-4 py-3 space-y-3 shadow-sm hover:shadow-md transition-shadow duration-200">
-                                    <div className="relative">
-                                        <div className="absolute top-0 right-0">
-                                            <CopyButton text={analysis.summary} label="summary" />
-                                        </div>
-                                        <div className="prose prose-sm max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-code:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-ul:text-gray-700 prose-ol:text-gray-700 prose-li:text-gray-700 pr-20">
-                                            <ReactMarkdown>{analysis.summary}</ReactMarkdown>
-                                        </div>
+                                    <div className="prose prose-sm max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-code:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-ul:text-gray-700 prose-ol:text-gray-700 prose-li:text-gray-700">
+                                        <ReactMarkdown>{analysis.summary}</ReactMarkdown>
                                     </div>
                                     <hr className="border-gray-200" />
-                                    <div className="relative">
-                                        <div className="absolute top-0 right-0">
-                                            <CopyButton text={analysis.details} label="details" />
-                                        </div>
-                                        <div className="prose prose-sm max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-strong:text-gray-900 prose-code:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-ul:text-gray-600 prose-ol:text-gray-600 prose-li:text-gray-600 pr-20">
-                                            <ReactMarkdown>{analysis.details}</ReactMarkdown>
-                                        </div>
+                                    <div className="prose prose-sm max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-strong:text-gray-900 prose-code:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-ul:text-gray-600 prose-ol:text-gray-600 prose-li:text-gray-600">
+                                        <ReactMarkdown>{analysis.details}</ReactMarkdown>
                                     </div>
                                 </div>
                             </div>
