@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    color-scheme: light;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, -system-ui,
+        -apple-system, BlinkMacSystemFont, "SF Pro Text", -ui-sans-serif,
+        system-ui, -system-ui, sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+}
+
+code {
+    font-family: Menlo, Monaco, Consolas, "SF Mono", "Roboto Mono", monospace;
+    font-size: 0.75rem;
+}
+
+/* Markdown prose styles */
+.prose h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.prose h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.prose h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.prose p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.prose ul,
+.prose ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.prose li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.prose strong {
+    font-weight: 600;
+}
+
+.prose blockquote {
+    border-left: 3px solid #000000;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: #4b5563;
+}
