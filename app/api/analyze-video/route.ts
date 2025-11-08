@@ -114,7 +114,7 @@ export async function POST(req: NextRequest) {
                     ],
                 },
             ],
-            stream: false,
+            stream: true,
         };
 
         const openrouterRes = await fetch(OPENROUTER_URL, {
@@ -140,33 +140,39 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const json = await openrouterRes.json();
+        // Stream the response back to the client
+        const stream = new ReadableStream({
+            async start(controller) {
+                const reader = openrouterRes.body?.getReader();
+                const decoder = new TextDecoder();
 
-        const contentText: string =
-            json.choices?.[0]?.message?.content ||
-            json.choices?.[0]?.message?.content?.[0]?.text ||
-            "";
+                if (!reader) {
+                    controller.close();
+                    return;
+                }
 
-        if (!contentText) {
-            return NextResponse.json(
-                {
-                    error: "No content returned from model.",
-                    raw: json,
-                },
-                { status: 502 }
-            );
-        }
+                try {
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
 
-        // Simple split into summary + details for UI.
-        const [firstLine, ...rest] = contentText.split("\n");
-        const summary =
-            firstLine.trim() || "AI analysis generated. See detailed breakdown below.";
-        const details = rest.join("\n").trim() || contentText;
+                        const chunk = decoder.decode(value, { stream: true });
+                        controller.enqueue(new TextEncoder().encode(chunk));
+                    }
+                } catch (error) {
+                    controller.error(error);
+                } finally {
+                    controller.close();
+                }
+            },
+        });
 
-        return NextResponse.json({
-            summary,
-            details,
-            // Optionally expose raw in non-production; here we keep minimal.
+        return new Response(stream, {
+            headers: {
+                "Content-Type": "text/event-stream",
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+            },
         });
     } catch (err: any) {
         return NextResponse.json(
